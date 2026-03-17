@@ -63,7 +63,7 @@ Usuario (Formulario Web)
 |---|---|
 | Frontend | React, Vite, TypeScript, Tailwind CSS |
 | Orquestador | n8n |
-| Base de datos | ORM (por definir: Prisma / TypeORM) |
+| Base de datos | PostgreSQL |
 | Notificaciones | Gmail / Outlook, WhatsApp Business API |
 | Calendario | Google Calendar API / Outlook Calendar API |
 | Seguridad | Cifrado AES / bcrypt para credenciales |
@@ -97,93 +97,6 @@ npm run dev
 
 La aplicación estará disponible en `http://localhost:5173`
 
-### Variable de entorno principal
-
-```env
-VITE_N8N_WEBHOOK_URL=https://tu-instancia-n8n.com/webhook/agendar-cita
-```
-
----
-
-## Conexión con n8n
-
-El frontend se comunica con n8n mediante un webhook POST. El payload enviado tiene la siguiente estructura:
-
-```json
-{
-  "paciente": {
-    "tipo_documento": "CC",
-    "cedula": "1020304050",
-    "nombres": "María",
-    "apellidos": "López",
-    "email": "maria@correo.com",
-    "telefono": "3001234567"
-  },
-  "cita": {
-    "especialidad": "Medicina general",
-    "tipo_cita": "primera_vez",
-    "fecha": "2025-04-10",
-    "hora": "09:00",
-    "modalidad": "presencial"
-  },
-  "timestamp": "2025-03-17T14:30:00.000Z"
-}
-```
-
-n8n responde con:
-
-```json
-{
-  "codigo": "CIT-2025-0042",
-  "confirmado": true
-}
-```
-
----
-
-## Historias de usuario y estimación
-
-El proyecto está compuesto por **14 historias de usuario** distribuidas en 4 épicas:
-
-| Épica | Historias | Story Points | Horas estimadas |
-|---|---|---|---|
-| Autenticación | HU-01, HU-02 | 13 | 26 |
-| Agendamiento de citas | HU-03 a HU-07 | 31 | 63 |
-| Gestión de citas | HU-08 a HU-11 | 16 | 40 |
-| Confirmación y recordatorios | HU-12 a HU-14 | 15 | 40 |
-| **Total** | **14 HU** | **75 pts** | **169 h** |
-
----
-
-## Estructura del proyecto
-
-```
-AgendApp/
-├── src/
-│   ├── components/       # Componentes React reutilizables
-│   ├── pages/            # Vistas principales
-│   ├── hooks/            # Custom hooks
-│   ├── services/         # Llamadas al webhook de n8n
-│   └── types/            # Tipado TypeScript
-├── public/
-├── .env.example
-├── package.json
-├── vite.config.ts
-└── README.md
-```
-
----
-
-## Roadmap
-
-- [x] Diseño de historias de usuario y criterios de aceptación
-- [x] Estimación de tareas (75 story points / 169 horas)
-- [ ] Implementación del formulario wizard (frontend)
-- [ ] Configuración de workflows en n8n
-- [ ] Integración con portal EPS Sura
-- [ ] Módulo de notificaciones (correo + calendario)
-- [ ] Recordatorios automáticos 24h
-- [ ] Pruebas de integración extremo a extremo
 
 ---
 
